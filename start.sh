@@ -1,13 +1,27 @@
 #!/usr/bin/env bash
 set -e
 
-# Render provides PORT env var automatically
-PORT=${PORT:-8080}
+# Ensure local bin exists in PATH
+export PATH="$HOME/.local/bin:$PATH"
 
-echo "Starting code-server on port $PORT..."
+# Install code-server if not found
+if ! command -v code-server &>/dev/null; then
+  echo "[INFO] code-server not found, installing..."
+  curl -fsSL https://code-server.dev/install.sh | sh -s -- --method=standalone --prefix=$HOME/.local
+fi
 
-# Password (change this or use env variable)
-PASSWORD=${PASSWORD:-"changeme"}
+# Use home folder instead of /workspace
+WORKDIR="$HOME/workspace"
+mkdir -p "$WORKDIR"
 
-# Start code-server
-exec code-server --bind-addr 0.0.0.0:$PORT --auth password
+# Default password (or set in Render ENV)
+PASSWORD=${PASSWORD:-mysecret}
+
+echo "[INFO] Starting code-server in $WORKDIR on port ${PORT:-10000} ..."
+exec "$HOME/.local/bin/code-server" \
+  --bind-addr 0.0.0.0:${PORT:-10000} \
+  --auth password \
+  --disable-telemetry \
+  --disable-update-check \
+  "$WORKDIR"
+  
