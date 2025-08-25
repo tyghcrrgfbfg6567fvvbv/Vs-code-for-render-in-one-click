@@ -19,7 +19,7 @@ This project lets you deploy a private, browser-based VS Code IDE with just one 
 ### 🔹 One-Click Deploy
 Click the button below to instantly deploy this repo to Render:
 
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/mr-risov/vs-code-in-render)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/tyghcrrgfbfg6567fvvbv/Vs-code-for-render-in-one-click)
 
 ---
 
