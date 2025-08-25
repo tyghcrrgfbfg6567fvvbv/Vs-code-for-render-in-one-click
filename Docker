@@ -1,14 +1,11 @@
-# Use coder's official code-server image
+# Use latest code-server image
 FROM codercom/code-server:latest
 
-# Set working dir
-WORKDIR /home/coder
+# Set working directory
+WORKDIR /home/coder/project
 
-# Copy any configs (optional)
-COPY . .
-
-# Expose Render’s web port
+# Expose port Render will use
 EXPOSE 8080
 
-# Start code-server bound to 0.0.0.0:8080
-CMD ["code-server", "--bind-addr", "0.0.0.0:8080", "--auth", "password"]
+# Use Render PORT env if available, fallback to 8080
+CMD ["sh", "-c", "code-server --bind-addr 0.0.0.0:${PORT:-8080} --auth password"]
