@@ -1,0 +1,14 @@
+# Use coder's official code-server image
+FROM codercom/code-server:latest
+
+# Set working dir
+WORKDIR /home/coder
+
+# Copy any configs (optional)
+COPY . .
+
+# Expose Render’s web port
+EXPOSE 8080
+
+# Start code-server bound to 0.0.0.0:8080
+CMD ["code-server", "--bind-addr", "0.0.0.0:8080", "--auth", "password"]
